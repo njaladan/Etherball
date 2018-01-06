@@ -19,16 +19,10 @@ contract Lottery {
     uint64 ticketPrice = 10 finney;
     uint64 ticketMax = 5;
 
-    // number of tickets is set to a hard 100, I hope I don't regret this
+    // number of tickets is set to a hard 5, I hope I don't regret this
+    // inb4 price of ethereum goes up to 10000 and funds are locked
     address[6] public ticketMapping;
     uint256 ticketsBought = 0;
-
-    address owner;
-
-    modifier onlyOwner()  {
-      require(msg.sender==owner);
-      _;
-    }
 
     // greater than to prevent locked funds
     modifier allTicketsSold() {
@@ -36,19 +30,10 @@ contract Lottery {
       _;
     }
 
-    function Lottery() public{
-      owner = msg.sender;
+    function Lottery() public {
+      // help i do not know if an empty constructor works
+      uint x = 5;
     }
-
-    function changeOwner(address _replacement) onlyOwner public returns (bool) {
-      // adding this because I don't trust myself yet
-      require(_replacement != address(0));
-      address old = owner;
-      owner = _replacement;
-      OwnershipTransferred(old, owner);
-      return true;
-    }
-
 
     function() payable public {
       // for now, have ticket purchasing only through functions
@@ -68,6 +53,13 @@ contract Lottery {
       ticketMapping[_ticket] = purchaser;
       LotteryTicketPurchased(purchaser, _ticket);
 
+      // placing "burden" of sendReward() on last ticket buyer
+      // is okay, because the refund from destroying the arrays
+      // makes it cost less than buying a regular ticket
+      if(ticketsBought>=ticketMax) {
+        sendReward();
+      }
+
       return true;
     }
 
@@ -86,15 +78,25 @@ contract Lottery {
       return winner;
     }
 
-    function lotteryPicker() public view returns (uint64) {
+    // @return a random number based off of current block information
+    function lotteryPicker() public allTicketsSold returns (uint64) {
       return uint64(sha256(block.timestamp, block.number)) % ticketMax;
     }
 
+    // resets everything to work
     function reset() private allTicketsSold returns (bool) {
       ticketsBought = 0;
       for(uint x = 0; x < ticketMax; x++) {
         delete ticketMapping[x];
       }
       return true;
+    }
+
+    // Yes, I know there's a built-in getting function for this,
+    // but I'd like to put it in anyways for readability for the
+    // web3 part :)
+
+    function getTicketsPurchased() public view returns(address[6]) {
+      return ticketMapping;
     }
 }

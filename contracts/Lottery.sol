@@ -1,9 +1,10 @@
 pragma solidity ^0.4.17;
 
 /**
- * @title Simple Ethereum-based lottery
- * @dev Source of randomness comes from ethereum block hashes.
- * Created to work with a web3 front end.
+ * @title Ethereum-Lottery
+ * @dev Simple lottery smart contract to run on the Ethereum
+ * chain. Designed to (hopefully) work well with a web3 front-end.
+ * Source of randomness comes from ethereum block hashes.
  *
  */
 
@@ -16,10 +17,10 @@ contract Lottery {
 
     // variables that I may want to change in the future
     uint64 ticketPrice = 10 finney;
-    uint64 ticketMax = 10;
+    uint64 ticketMax = 5;
 
     // number of tickets is set to a hard 100, I hope I don't regret this
-    address[10] public ticketMapping;
+    address[6] public ticketMapping;
     uint256 ticketsBought = 0;
 
     address owner;
@@ -57,15 +58,14 @@ contract Lottery {
 
     function buyTicket(uint16 _ticket) payable public returns (bool) {
       // I'd prefer all tickets to just be 0.01 ether
-      // require(msg.value == ticketPrice);
+      require(msg.value == ticketPrice);
       require(_ticket > 0 && _ticket < ticketMax+1);
-      require(ticketMapping[_ticket-1]==address(0));
+      require(ticketMapping[_ticket]==address(0));
       require(ticketsBought < ticketMax);
 
       address purchaser = msg.sender;
       ticketsBought += 1;
-      ticketMapping[9] = purchaser;
-      ticketMapping[_ticket-1] = purchaser;
+      ticketMapping[_ticket] = purchaser;
       LotteryTicketPurchased(purchaser, _ticket);
 
       return true;
@@ -74,9 +74,10 @@ contract Lottery {
     // if a bad winner is chosen the first time, it's possible to just run
     // sendReward() again. But can this cause an attack?
     function sendReward() public allTicketsSold returns (address) {
-      //address winner = lotteryPicker();
+      uint64 winningNumber = lotteryPicker();
+      address winner = ticketMapping[winningNumber];
+
       // prevent locked funds by sending to bad address
-      address winner = address(1);
       require(winner != address(0));
       uint256 totalAmount = ticketMax*ticketPrice;
       reset();
@@ -85,10 +86,8 @@ contract Lottery {
       return winner;
     }
 
-    function lotteryPicker() public view returns (bytes32) {
-      uint256 hello = 12*ticketMax;
-
-      return block.blockhash(block.number);
+    function lotteryPicker() public view returns (uint64) {
+      return uint64(sha256(block.timestamp, block.number)) % ticketMax;
     }
 
     function reset() private allTicketsSold returns (bool) {

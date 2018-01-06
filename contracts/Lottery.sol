@@ -11,9 +11,7 @@ pragma solidity ^0.4.17;
 contract Lottery {
 
     event LotteryTicketPurchased(address indexed _purchaser, uint256 _ticketID);
-    event LotteryAmountPaid(address indexed _winner, uint256 _amount);
-    event OwnershipTransferred(address _old, address _new);
-
+    event LotteryAmountPaid(address indexed _winner, uint64 _ticketID, uint256 _amount);
 
     // variables that I may want to change in the future
     uint64 ticketPrice = 10 finney;
@@ -32,7 +30,6 @@ contract Lottery {
 
     function Lottery() public {
       // help i do not know if an empty constructor works
-      uint x = 5;
     }
 
     function() payable public {
@@ -55,7 +52,7 @@ contract Lottery {
 
       // placing "burden" of sendReward() on last ticket buyer
       // is okay, because the refund from destroying the arrays
-      // makes it cost less than buying a regular ticket
+      // makes it cost the same as buying a regular ticket
       if(ticketsBought>=ticketMax) {
         sendReward();
       }
@@ -74,7 +71,7 @@ contract Lottery {
       uint256 totalAmount = ticketMax*ticketPrice;
       reset();
       winner.transfer(totalAmount);
-      LotteryAmountPaid(winner, totalAmount);
+      LotteryAmountPaid(winner, winningNumber, totalAmount);
       return winner;
     }
 
@@ -86,7 +83,7 @@ contract Lottery {
     // resets everything to work
     function reset() private allTicketsSold returns (bool) {
       ticketsBought = 0;
-      for(uint x = 0; x < ticketMax; x++) {
+      for(uint x = 0; x < ticketMax+1; x++) {
         delete ticketMapping[x];
       }
       return true;
@@ -98,5 +95,13 @@ contract Lottery {
 
     function getTicketsPurchased() public view returns(address[6]) {
       return ticketMapping;
+    }
+
+    function getTicketsBought() public view returns (uint256) {
+        return ticketsBought;
+    }
+
+    function getTicketMax() public view returns (uint256) {
+        return ticketMax;
     }
 }

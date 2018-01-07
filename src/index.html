@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    <title>Crowdfunding Campaign - Buy</title>
+
+    <!-- Bootstrap -->
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+  </head>
+  <body>
+    <div class="container">
+      <div class="row">
+        <div class="col-xs-12 col-sm-8 col-sm-push-2">
+          <h1 class="text-center">EtherBall</h1>
+          <hr/>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-xs-12 col-sm-8 col-sm-push-2">
+          <h3 class="panel-title">Price to buy ticket: <span id="EthPrice"></span> Eth</h3>
+          <br/>
+        </div>
+      </div>
+
+      <div id="petsRow" class="row">
+        <div class="col-sm-6 col-sm-push-3 col-md-4 col-md-push-4">
+          <div class="panel panel-default">
+            <div class="panel-body">
+              <h4>Lottery Buying Options</h4>
+              <p>Please choose one of the tickets below.</p>
+              <button class="btn btn-primary" id="buyTicket1" type="button">1</button>
+              <button class="btn btn-primary" id="buyTicket2" type="button">2</button>
+              <button class="btn btn-primary" id="buyTicket3" type="button">3</button>
+              <button class="btn btn-primary" id="buyTicket4" type="button">4</button>
+              <button class="btn btn-primary" id="buyTicket5" type="button">5</button>
+
+
+              <br/>
+              <h4>Balance</h4>
+              Your Token balance: <strong><span id="tokenBalance"></span></strong> tokens<br/><br/>
+              Get 1 token for <strong><span id="1TokenPrice"></span></strong> Eth<br/>
+              <button class="btn btn-primary" id="buy1Tokens" type="button">Buy 1 Token</button><br/>
+              Get 10 tokens for <strong><span id="10TokenPrice"></span></strong> Eth<br/>
+              <button class="btn btn-primary" id="buy10Tokens" type="button">Buy 10 Tokens</button><br/>
+              <p id='response10'></p><br/>
+              Get 100 tokens for <strong><span id="100TokenPrice"></span></strong> Eth<br/>
+              <button class="btn btn-primary" id="buy100Tokens" type="button">Buy 100 Tokens</button><br/>
+              <p id='response100'></p><br/>
+              To display your token balance in Metamask, add following address:<br/>
+              <span id='TokenContractAddress'></span><br/>
+
+              <!-- this is my stuff -->
+
+
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <!-- Include all compiled plugins (below), or include individual files as needed -->
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/web3.min.js"></script>
+    <script src="js/truffle-contract.js"></script>
+    <script src="js/app.js"></script>
+  </body>
+</html>

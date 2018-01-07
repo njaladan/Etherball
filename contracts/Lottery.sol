@@ -14,13 +14,13 @@ contract Lottery {
     event LotteryAmountPaid(address indexed _winner, uint64 _ticketID, uint256 _amount);
 
     // variables that I may want to change in the future
-    uint64 ticketPrice = 10 finney;
-    uint64 ticketMax = 5;
+    uint64 public ticketPrice = 10 finney;
+    uint64 public ticketMax = 5;
 
     // number of tickets is set to a hard 5, I hope I don't regret this
     // inb4 price of ethereum goes up to 10000 and funds are locked
     address[6] public ticketMapping;
-    uint256 ticketsBought = 0;
+    uint256 public ticketsBought = 0;
 
     // greater than to prevent locked funds
     modifier allTicketsSold() {
@@ -89,19 +89,11 @@ contract Lottery {
       return true;
     }
 
-    // Yes, I know there's a built-in getting function for this,
-    // but I'd like to put it in anyways for readability for the
-    // web3 part :)
-
+    // @dev returns the entire array of tickets purchased
+    // while I understand there's a getter function for the
+    // array, I'd prefer for there to be a way to get it
+    // all at once, since the getter is by element only
     function getTicketsPurchased() public view returns(address[6]) {
       return ticketMapping;
-    }
-
-    function getTicketsBought() public view returns (uint256) {
-        return ticketsBought;
-    }
-
-    function getTicketMax() public view returns (uint256) {
-        return ticketMax;
     }
 }

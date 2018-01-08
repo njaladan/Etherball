@@ -1,79 +1,146 @@
 <!DOCTYPE html>
 <html lang="en">
+
   <head>
+
     <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
-    <title>Crowdfunding Campaign - Buy</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
 
-    <!-- Bootstrap -->
-    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <title>Etherball</title>
 
-    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
-    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-    <!--[if lt IE 9]>
-      <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
-      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
-    <![endif]-->
+    <!-- Bootstrap core CSS -->
+    <link href="css/bootstrap.css" rel="stylesheet">
+
+    <!-- Custom styles for this template -->
+    <link href="css/scrolling-nav.css" rel="stylesheet">
+
   </head>
-  <body>
-    <div class="container">
-      <div class="row">
-        <div class="col-xs-12 col-sm-8 col-sm-push-2">
-          <h1 class="text-center">EtherBall</h1>
-          <hr/>
+
+  <body id="page-top">
+
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top" id="mainNav">
+      <div class="container">
+        <a class="navbar-brand js-scroll-trigger" href="#page-top">Etherball 🎟️</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarResponsive">
+          <ul class="navbar-nav ml-auto">
+            <li class="nav-item">
+              <a class="nav-link js-scroll-trigger" href="#about">Buy A Ticket</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link js-scroll-trigger" href="#services">FAQ</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link js-scroll-trigger" href="#contact">Contact</a>
+            </li>
+          </ul>
         </div>
       </div>
-      <div class="row">
-        <div class="col-xs-12 col-sm-8 col-sm-push-2">
-          <h3 class="panel-title">Price to buy ticket: <span id="EthPrice"></span> Eth</h3>
-          <br/>
-        </div>
+    </nav>
+
+    <header class="bg-primary text-white">
+      <div class="container text-center">
+        <h1>Play Etherball!</h1>
+        <p class="lead">The current jackpot is 0.125 eth, or ~$<span id="poolPrice"></span>.</p>
       </div>
+    </header>
 
-      <div id="petsRow" class="row">
-        <div class="col-sm-6 col-sm-push-3 col-md-4 col-md-push-4">
-          <div class="panel panel-default">
-            <div class="panel-body">
-              <h4>Lottery Buying Options</h4>
-              <p>Please choose one of the tickets below.</p>
-              <button class="btn btn-primary" id="buyTicket1" type="button">1</button>
-              <button class="btn btn-primary" id="buyTicket2" type="button">2</button>
-              <button class="btn btn-primary" id="buyTicket3" type="button">3</button>
-              <button class="btn btn-primary" id="buyTicket4" type="button">4</button>
-              <button class="btn btn-primary" id="buyTicket5" type="button">5</button>
-
-
-              <br/>
-              <h4>Balance</h4>
-              Your Token balance: <strong><span id="tokenBalance"></span></strong> tokens<br/><br/>
-              Get 1 token for <strong><span id="1TokenPrice"></span></strong> Eth<br/>
-              <button class="btn btn-primary" id="buy1Tokens" type="button">Buy 1 Token</button><br/>
-              Get 10 tokens for <strong><span id="10TokenPrice"></span></strong> Eth<br/>
-              <button class="btn btn-primary" id="buy10Tokens" type="button">Buy 10 Tokens</button><br/>
-              <p id='response10'></p><br/>
-              Get 100 tokens for <strong><span id="100TokenPrice"></span></strong> Eth<br/>
-              <button class="btn btn-primary" id="buy100Tokens" type="button">Buy 100 Tokens</button><br/>
-              <p id='response100'></p><br/>
-              To display your token balance in Metamask, add following address:<br/>
-              <span id='TokenContractAddress'></span><br/>
-
-              <!-- this is my stuff -->
-
-
+    <section id="about">
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-8 mx-auto">
+            <h1>Buy A Ticket</h1>
+            <p class="lead">Each ticket is only 0.005 eth. At current prices, that's ~$<span id="ticketPrice"></span>.</p>
+            <div style="text-align:center;">
+              <button class="btn btn-primary" id="buyTicket1" type="button">Ticket 1</button>
+              <button class="btn btn-primary" id="buyTicket2" type="button">Ticket 2</button>
+              <button class="btn btn-primary" id="buyTicket3" type="button">Ticket 3</button>
+              <button class="btn btn-primary" id="buyTicket4" type="button">Ticket 4</button>
+              <button class="btn btn-primary" id="buyTicket5" type="button">Ticket 5</button>
+              <button class="btn btn-primary" id="buyTicket6" type="button">Ticket 6</button>
+              <button class="btn btn-primary" id="buyTicket7" type="button">Ticket 7</button>
+              <button class="btn btn-primary" id="buyTicket8" type="button">Ticket 8</button>
+              <button class="btn btn-primary" id="buyTicket9" type="button">Ticket 9</button>
+              <button class="btn btn-primary" id="buyTicket10" type="button">Ticket 10</button>
+              <button class="btn btn-primary" id="buyTicket11" type="button">Ticket 11</button>
+              <button class="btn btn-primary" id="buyTicket12" type="button">Ticket 12</button>
+              <button class="btn btn-primary" id="buyTicket13" type="button">Ticket 13</button>
+              <button class="btn btn-primary" id="buyTicket14" type="button">Ticket 14</button>
+              <button class="btn btn-primary" id="buyTicket15" type="button">Ticket 15</button>
+              <button class="btn btn-primary" id="buyTicket16" type="button">Ticket 16</button>
+              <button class="btn btn-primary" id="buyTicket17" type="button">Ticket 17</button>
+              <button class="btn btn-primary" id="buyTicket18" type="button">Ticket 18</button>
+              <button class="btn btn-primary" id="buyTicket19" type="button">Ticket 19</button>
+              <button class="btn btn-primary" id="buyTicket20" type="button">Ticket 20</button>
+              <button class="btn btn-primary" id="buyTicket21" type="button">Ticket 21</button>
+              <button class="btn btn-primary" id="buyTicket22" type="button">Ticket 22</button>
+              <button class="btn btn-primary" id="buyTicket23" type="button">Ticket 23</button>
+              <button class="btn btn-primary" id="buyTicket24" type="button">Ticket 24</button>
+              <button class="btn btn-primary" id="buyTicket25" type="button">Ticket 25</button>
             </div>
           </div>
         </div>
       </div>
-    </div>
+    </section>
 
-    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <section id="services" class="bg-light">
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-8 mx-auto">
+            <h1>FAQ</h1>
+            <h4>What is Etherball?</h4>
+            <p class="lead">Etherball is a lottery built on top of the Etherum blockchain. Because of its decentralized nature, Etherball is completely controlled by the blockchain, so payments and ticket-buying is secured with the power of millions of computers around the world.</p>
+            <h4>Why should I trust it?</h4>
+            <p class="lead">You're free (and encouraged) to check out the source code at (etherscan link here). If you have any questions or concerns feel free to contact me using the links at the bottom of the page.</p>
+            <h4>How can I use Etherball?</h4>
+            <p class="lead">The easiest way to use Etherball is to download the Metamask wallet (here), send yourself some ether using an exchange of sorts, and choosing a ticket to buy at the top of the page.</p>
+            <h4>My transaction isn't going through. Why?</h4>
+            <p class="lead">Try raising your gas limit for the transaction. Don't worry if it seems high; most of the times, the gas limit isn't even reached. Also, it's possible that someone else just bought the ticket that you clicked on and the website or blockchain didn't update yet. Try choosing a different ticket.</p>
+            <h4>Why so few tickets?</h4>
+            <p class="lead">Fewer tickets equals to faster games, which means less time waiting to see if you've won! The game resets automatically too, so you can play more games quicker.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="contact">
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-8 mx-auto">
+            <h2>Contact me</h2>
+            <p class="lead">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Vero odio fugiat voluptatem dolor, provident officiis, id iusto! Obcaecati incidunt, qui nihil beatae magnam et repudiandae ipsa exercitationem, in, quo totam.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="py-5 bg-dark">
+      <div class="container">
+        <p class="m-0 text-center text-white">Made with ❤️ by Nagaganesh Jaladanki.</p>
+      </div>
+      <!-- /.container -->
+    </footer>
+
+    <!-- Bootstrap core JavaScript -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-    <!-- Include all compiled plugins (below), or include individual files as needed -->
-    <script src="js/bootstrap.min.js"></script>
+    <script src="js/bootstrap.bundle.min.js"></script>
     <script src="js/web3.min.js"></script>
     <script src="js/truffle-contract.js"></script>
     <script src="js/app.js"></script>
+
+    <!-- Plugin JavaScript -->
+    <script src="js/jquery.easing.min.js"></script>
+
+    <!-- Custom JavaScript for this theme -->
+    <script src="js/scrolling-nav.js"></script>
+    <script src="js/ethprice.js"></script>
+
   </body>
+
 </html>

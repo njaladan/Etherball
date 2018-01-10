@@ -17,18 +17,20 @@ Etherball features:
 
  • A blockchain-based randomness generator to ensure fairness
 
-## Technologies Used
- • Truffle  
+ • Real-time ether to USD converter
 
- • Node.js  
+## Technologies Used
+ • [Truffle](https://github.com/trufflesuite/truffle)  
+
+ • [Node.js](https://github.com/nodejs/node)
 
  • HTML/CSS  
 
- • TestRPC  
+ • [TestRPC](https://github.com/pipermerriam/eth-testrpc)  
 
- • Bootstrap  
+ • [Bootstrap](https://github.com/twbs/bootstrap)  
 
- • Web3
+ • [Web3](https://github.com/ethereum/web3.js/)
 
 ## Installation
 Installing Etherball to use on your machine is simple. First,  

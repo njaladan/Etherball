@@ -13,8 +13,8 @@ App = {
       web3 = new Web3(web3.currentProvider);
     } else {
       // set the provider you want from Web3.providers
-      App.web3Provider = new Web3.providers.HttpProvider('http://127.0.0.1:8545');
-      //App.web3Provider = new Web3.providers.HttpProvider('https://ropsten.infura.io/cpokRXa96X1xQ48pv841');
+      //App.web3Provider = new Web3.providers.HttpProvider('http://127.0.0.1:8545');
+      App.web3Provider = new Web3.providers.HttpProvider('https://mainnet.infura.io/GjyHpPqLZffsizIx6ieH');
       web3 = new Web3(App.web3Provider);
     }
 
@@ -569,10 +569,9 @@ App = {
     console.log('Getting ticket mapping...');
     App.contracts.Lottery.deployed().then(function(instance) {
         lottery = instance;
-        console.log()
+        console.log(lottery.getTicketsPurchased())
         return lottery.getTicketsPurchased();
     }).then(function(result){
-      console.log(result);
       var i;
       var button;
       for(i = 0; i< result.length; i++){

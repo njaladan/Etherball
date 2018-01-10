@@ -1,7 +1,7 @@
 # Etherball 🎟
 Etherball is a simple lottery system composed of a back-end built with Node.js, Solidity, and Truffle to run on the Ethereum blockchain, and a front-end created using Bootstrap, Web3, and HTML+CSS. I made Etherball to try to get a grasp of the full-stack process behind creating Ethereum DApps.
 
-### Features
+## Features
 Etherball features:  
 
  • Integration with all major Ethereum testnets  
@@ -14,10 +14,10 @@ Etherball features:
 
  • A blockchain-based nondeterministic randomness generator
 
-### Visit
+## Visit
 The current link to use Etherball is https://lottery-ccadyzdork.now.sh, though this link is subject to change.
 
-### Installation
+## Installation
 Installing Etherball to use on your machine is simple. First,  
 
 `git clone`  
@@ -38,12 +38,12 @@ Finally, to initialize and open the Node server,
 
 `npm run dev`
 
-### Other
+## Other
  • The majority of the code powering the app is located in `contracts/Lottery.sol` and `src/js/app.js` - if you'd like to see how I edit it in any way, that's probably the place to go.
 
  • The source of randomness for this lottery system comes from a SHA-256 hash taken from the blockchain timestamp and number.
 
-### Technologies Used
+## Technologies Used
  • Truffle  
 
  • Node.js  

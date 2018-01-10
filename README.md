@@ -1,47 +1,21 @@
 # Etherball 🎟
-Etherball is a simple lottery system composed of a back-end built with Node.js, Solidity, and Truffle to run on the Ethereum blockchain, and a front-end created using Bootstrap, Web3, and HTML+CSS. I made Etherball to try to get a grasp of the full-stack process behind creating Ethereum DApps.
+
+Etherball is a simple lottery web app with numerical tickets and a fixed jackpot built for the Ethereum blockchain. I made Etherball to experiment with and get a grasp of the full-stack process behind creating Ethereum DApps.
+
+The current link to use Etherball is https://lottery-ccadyzdork.now.sh, though this link is subject to change.
 
 ## Features
-Etherball features:  
-
- • Integration with all major Ethereum testnets  
-
- • Works with the Metamask wallet and Mist browser  
+Etherball features:
 
  • Easy to purchase ticket interface (and prevention of duplicate tickets)  
 
- • A simple but functional interface built with Bootstrap  
+ • Works with the Metamask wallet and Mist browser  
 
- • A blockchain-based nondeterministic randomness generator
+ • A simple but functional front-end built with Bootstrap  
 
-## Visit
-The current link to use Etherball is https://lottery-ccadyzdork.now.sh, though this link is subject to change.
+ • Integration with all major Ethereum testnets
 
-## Installation
-Installing Etherball to use on your machine is simple. First,  
-
-`git clone`  
-
-the repository to get the files onto your system. Next, install the necessary Node.js modules with  
-
-`npm install`  
-
-Create and place your mnemonic private key at the location  
-
-`keystore/eth_keystore.txt`  
-
-If you plan on changing the `Lottery.sol` source code, you'll want to  
-
-`truffle migrate`  
-
-Finally, to initialize and open the Node server,  
-
-`npm run dev`
-
-## Other
- • The majority of the code powering the app is located in `contracts/Lottery.sol` and `src/js/app.js` - if you'd like to see how I edit it in any way, that's probably the place to go.
-
- • The source of randomness for this lottery system comes from a SHA-256 hash taken from the blockchain timestamp and number.
+ • A blockchain-based randomness generator to ensure fairness
 
 ## Technologies Used
  • Truffle  
@@ -55,3 +29,40 @@ Finally, to initialize and open the Node server,
  • Bootstrap  
 
  • Web3
+
+## Installation
+Installing Etherball to use on your machine is simple. First,  
+
+`git clone`  
+
+the repository. Next, navigate to the cloned directory and install the necessary Node.js modules with  
+
+`npm install`  
+
+Create and place your 12-word mnemonic private key at the location  
+
+`keystore/eth_keystore.txt`  
+
+Initialize a local blockchain with
+
+`testrpc`
+
+and deploy the smart contract with
+
+`truffle migrate`  
+
+Finally, to open the web app,  
+
+`npm run dev`
+
+
+## Miscellaneous
+ • The majority of the code powering the app is located in `contracts/Lottery.sol` and `src/js/app.js` - if you'd like to see how the app works in any way, that's probably the place to go.
+
+ • The source of randomness for this lottery system comes from a SHA-256 hash taken from the blockchain timestamp and number.
+
+ • Feel free to submit a pull request if you have any changes or suggestions to make. :)
+
+## Licensing
+
+Etherball is released under the terms of the MIT license. For more information, see https://opensource.org/licenses/MIT.

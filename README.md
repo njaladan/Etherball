@@ -2,7 +2,7 @@
 
 Etherball is a simple lottery web app with numerical tickets and a fixed jackpot built for the Ethereum blockchain. I made Etherball to experiment with and get a grasp of the full-stack process behind creating Ethereum DApps.
 
-The current link to use Etherball is https://lottery-ccadyzdork.now.sh, though this link is subject to change.
+The current link to use Etherball is https://lottery.now.sh, though this link is subject to change.
 
 ## Features
 Etherball features:

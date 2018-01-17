@@ -4,6 +4,8 @@ Etherball is a simple lottery web app with numerical tickets and a fixed jackpot
 
 The current link to use Etherball is https://lottery.now.sh, though this link is subject to change.
 
+To see a picture of the final product, check out the `img` folder.
+
 ## Features
 Etherball features:
 

@@ -1,10 +1,14 @@
 # Etherball 🎟
+![Travis-CI build passing](https://api.travis-ci.org/njaladan/Etherball.svg)
 
 Etherball is a simple lottery web app with numerical tickets and a fixed jackpot built for the Ethereum blockchain. I made Etherball to experiment with and get a grasp of the full-stack process behind creating Ethereum DApps.
 
 The current link to use Etherball is https://lottery.now.sh, though this link is subject to change.
 
-To see a picture of the final product, check out the `img` folder.
+<p align="center">
+  <img src="./img/demo.gif" height="80%" width="80%">
+</p>
+
 
 ## Features
 Etherball features:

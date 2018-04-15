@@ -27,4 +27,5 @@ install:
 
 script:
   - testrpc &
-  - truffle test
+  - truffle compile
+  - truffle migrate

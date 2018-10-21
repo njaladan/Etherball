@@ -22,10 +22,10 @@ before_install:
   - npm install -g ethereumjs-testrpc truffle
 
 install:
-  - npm install 
-
+  - npm install
 
 script:
   - testrpc &
   - truffle compile
   - truffle migrate
+  - npm run dev

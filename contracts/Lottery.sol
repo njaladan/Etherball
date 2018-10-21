@@ -1,86 +1,96 @@
 pragma solidity ^0.4.17;
 
 /**
- * @title Ethereum-Lottery
- * @dev Simple lottery smart contract to run on the Ethereum
- * chain. Designed to (hopefully) work well with a web3 front-end.
- * Source of randomness comes from ethereum block hashes.
- *
- */
-
+  * @title Ethereum-Lottery
+  * @author Nagaganesh Jaladanki
+  * @license MIT
+  * @dev Simple lottery smart contract to run on the Ethereum
+  * chain. Designed to work well with a web3 front-end.
+  * Source of randomness comes from Ethereum block hashes.
+  */
+  
 contract Lottery {
 
     event LotteryTicketPurchased(address indexed _purchaser, uint256 _ticketID);
     event LotteryAmountPaid(address indexed _winner, uint64 _ticketID, uint256 _amount);
 
-    // variables that I may want to change in the future
+    // Note: prone to change
     uint64 public ticketPrice = 5 finney;
     uint64 public ticketMax = 25;
 
-    // number of tickets is set to a hard 5, I hope I don't regret this
-    // inb4 price of ethereum goes up to 10000 and funds are locked
+    // Initialize mapping
     address[26] public ticketMapping;
     uint256 public ticketsBought = 0;
 
-    // greater than to prevent locked funds
+    // Prevent potential locked funds by checking greater than
     modifier allTicketsSold() {
-      require(ticketsBought>=ticketMax);
+      require(ticketsBought >= ticketMax);
       _;
     }
 
+    /* @dev Empty constructor - nothing needed here */
     function Lottery() public {
-      // help i do not know if an empty constructor works
+
     }
 
+    /* @dev Tickets may only be purchased through the buyTickets function */
     function() payable public {
-      // for now, have ticket purchasing only through functions
-      // for sanity purposes
       revert();
     }
 
+    /**
+      * @dev Purchase ticket and send reward if necessary
+      * @param _ticket Ticket number to purchase
+      * @return bool Validity of transaction
+      */
     function buyTicket(uint16 _ticket) payable public returns (bool) {
-      // I'd prefer all tickets to just be 0.01 ether
       require(msg.value == ticketPrice);
-      require(_ticket > 0 && _ticket < ticketMax+1);
-      require(ticketMapping[_ticket]==address(0));
+      require(_ticket > 0 && _ticket < ticketMax + 1);
+      require(ticketMapping[_ticket] == address(0));
       require(ticketsBought < ticketMax);
 
+      // Avoid reentrancy attacks
       address purchaser = msg.sender;
       ticketsBought += 1;
       ticketMapping[_ticket] = purchaser;
       LotteryTicketPurchased(purchaser, _ticket);
 
-      // placing "burden" of sendReward() on last ticket buyer
-      // is okay, because the refund from destroying the arrays
-      // makes it cost the same as buying a regular ticket
-      if(ticketsBought>=ticketMax) {
+      /** Placing the "burden" of sendReward() on the last ticket
+        * buyer is okay, because the refund from destroying the
+        * arrays decreases net gas cost
+        */
+      if (ticketsBought>=ticketMax) {
         sendReward();
       }
 
       return true;
     }
 
-    // if a bad winner is chosen the first time, it's possible to just run
-    // sendReward() again. But can this cause an attack?
+    /**
+      * @dev Send lottery winner their reward
+      * @return address of winner
+      */
     function sendReward() public allTicketsSold returns (address) {
       uint64 winningNumber = lotteryPicker();
       address winner = ticketMapping[winningNumber];
+      uint256 totalAmount = ticketMax * ticketPrice;
 
-      // prevent locked funds by sending to bad address
+      // Prevent locked funds by sending to bad address
       require(winner != address(0));
-      uint256 totalAmount = ticketMax*ticketPrice;
+
+      // Prevent reentrancy
       reset();
       winner.transfer(totalAmount);
       LotteryAmountPaid(winner, winningNumber, totalAmount);
       return winner;
     }
 
-    // @return a random number based off of current block information
+    /* @return a random number based off of current block information */
     function lotteryPicker() public allTicketsSold returns (uint64) {
       return uint64(sha256(block.timestamp, block.number)) % ticketMax;
     }
 
-    // resets everything to work again
+    /* @dev Reset lottery mapping once a round is finished */
     function reset() private allTicketsSold returns (bool) {
       ticketsBought = 0;
       for(uint x = 0; x < ticketMax+1; x++) {
@@ -89,10 +99,10 @@ contract Lottery {
       return true;
     }
 
-    // @dev returns the entire array of tickets purchased
-    // while I understand there's a getter function for the
-    // array, I'd prefer for there to be a way to get it
-    // all at once, since the getter is by element only
+    /** @dev Returns ticket map array for front-end access.
+      * Using a getter method is ineffective since it allows
+      * only element-level access
+      */
     function getTicketsPurchased() public view returns(address[26]) {
       return ticketMapping;
     }

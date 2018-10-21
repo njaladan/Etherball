@@ -3,12 +3,12 @@ pragma solidity ^0.4.17;
 /**
   * @title Ethereum-Lottery
   * @author Nagaganesh Jaladanki
-  * @license MIT
   * @dev Simple lottery smart contract to run on the Ethereum
   * chain. Designed to work well with a web3 front-end.
   * Source of randomness comes from Ethereum block hashes.
+  * MIT License.
   */
-  
+
 contract Lottery {
 
     event LotteryTicketPurchased(address indexed _purchaser, uint256 _ticketID);
@@ -26,11 +26,6 @@ contract Lottery {
     modifier allTicketsSold() {
       require(ticketsBought >= ticketMax);
       _;
-    }
-
-    /* @dev Empty constructor - nothing needed here */
-    function Lottery() public {
-
     }
 
     /* @dev Tickets may only be purchased through the buyTickets function */
@@ -53,7 +48,7 @@ contract Lottery {
       address purchaser = msg.sender;
       ticketsBought += 1;
       ticketMapping[_ticket] = purchaser;
-      LotteryTicketPurchased(purchaser, _ticket);
+      emit LotteryTicketPurchased(purchaser, _ticket);
 
       /** Placing the "burden" of sendReward() on the last ticket
         * buyer is okay, because the refund from destroying the
@@ -81,13 +76,15 @@ contract Lottery {
       // Prevent reentrancy
       reset();
       winner.transfer(totalAmount);
-      LotteryAmountPaid(winner, winningNumber, totalAmount);
+      emit LotteryAmountPaid(winner, winningNumber, totalAmount);
       return winner;
     }
 
     /* @return a random number based off of current block information */
-    function lotteryPicker() public allTicketsSold returns (uint64) {
-      return uint64(sha256(block.timestamp, block.number)) % ticketMax;
+    function lotteryPicker() public view allTicketsSold returns (uint64) {
+      bytes memory entropy = abi.encodePacked(block.timestamp, block.number);
+      bytes32 hash = sha256(entropy);
+      return uint64(hash) % ticketMax;
     }
 
     /* @dev Reset lottery mapping once a round is finished */
